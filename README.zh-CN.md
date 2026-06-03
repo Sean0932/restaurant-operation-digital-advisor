@@ -33,6 +33,75 @@
 
 如果用户一定要具体品牌推荐，需要先明确所在市场、门店规模、预算、现有系统、需要的模块、集成要求、语言和合规限制；没有当前市场信息时，不编造系统能力、价格、可用性或本地服务。
 
+## 安装使用
+
+这个仓库本身就是一个 skill 目录：根目录包含 `SKILL.md`、`references/`、`scripts/` 和 `examples/`。
+
+### Claude Code
+
+Claude Code 通常会从 `~/.claude/skills/<skill-name>/SKILL.md` 发现 skill。
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
+  ~/.claude/skills/restaurant-operation-digital-advisor
+```
+
+重启 Claude Code 后可以这样问：
+
+```text
+请使用 restaurant-operation-digital-advisor 这个 skill，帮我做一次餐饮经营数字化体检。
+```
+
+### Codex
+
+支持本地 skills 的 Codex 通常会从 `~/.codex/skills/<skill-name>/SKILL.md` 发现 skill。
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
+  ~/.codex/skills/restaurant-operation-digital-advisor
+```
+
+重启 Codex 后可以这样问：
+
+```text
+请使用 restaurant-operation-digital-advisor 这个 skill。
+```
+
+如果你的 Codex 环境带 `$skill-installer`，也可以直接让 Codex 执行：
+
+```text
+$skill-installer install https://github.com/Sean0932/restaurant-operation-digital-advisor
+```
+
+### OpenClaw / 小龙虾
+
+如果你的小龙虾 / OpenClaw 版本支持 Git skill 安装，可以尝试：
+
+```bash
+openclaw skills install git:Sean0932/restaurant-operation-digital-advisor@main
+```
+
+然后按你的 OpenClaw 工作区配置启用或允许该 skill，必要时重启 agent 会话。
+
+也可以手动安装：把这个仓库 clone 或复制到 OpenClaw 的 skills 目录中，确保最终结构是：
+
+```text
+restaurant-operation-digital-advisor/SKILL.md
+```
+
+### 其它 Agent
+
+只要 agent 支持 `SKILL.md` 约定，就把这个仓库作为一个完整 skill 目录安装。最终结构应该是：
+
+```text
+<skills-directory>/restaurant-operation-digital-advisor/SKILL.md
+<skills-directory>/restaurant-operation-digital-advisor/references/
+<skills-directory>/restaurant-operation-digital-advisor/scripts/
+<skills-directory>/restaurant-operation-digital-advisor/examples/
+```
+
 ## 快速评分
 
 可以用本地脚本做离线评分：

@@ -39,6 +39,79 @@ restaurant-operation-digital-advisor/
   examples/
 ```
 
+## Install
+
+This repository is a single skill folder: the repo root contains `SKILL.md`, `references/`, `scripts/`, and `examples/`.
+
+### Claude Code
+
+Claude Code discovers skills from `~/.claude/skills/<skill-name>/SKILL.md`.
+
+```bash
+mkdir -p ~/.claude/skills
+git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
+  ~/.claude/skills/restaurant-operation-digital-advisor
+```
+
+Restart Claude Code, then ask:
+
+```text
+Use the restaurant-operation-digital-advisor skill to run a restaurant operation readiness check.
+```
+
+### Codex
+
+Codex builds that support local skills commonly discover them from `~/.codex/skills/<skill-name>/SKILL.md`.
+
+```bash
+mkdir -p ~/.codex/skills
+git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
+  ~/.codex/skills/restaurant-operation-digital-advisor
+```
+
+Restart Codex, then ask:
+
+```text
+Use the restaurant-operation-digital-advisor skill.
+```
+
+If your Codex environment includes the `$skill-installer`, you can also ask Codex:
+
+```text
+$skill-installer install https://github.com/Sean0932/restaurant-operation-digital-advisor
+```
+
+### OpenClaw / 小龙虾
+
+If your OpenClaw build supports Git skill installation:
+
+```bash
+openclaw skills install git:Sean0932/restaurant-operation-digital-advisor@main
+```
+
+Then enable or allow the skill according to your OpenClaw workspace configuration, restart the agent session if needed, and ask:
+
+```text
+Use the restaurant-operation-digital-advisor skill.
+```
+
+Manual install also works: clone or copy this repository into your OpenClaw skills directory so the final layout contains:
+
+```text
+restaurant-operation-digital-advisor/SKILL.md
+```
+
+### Generic Agent
+
+For any agent that supports the `SKILL.md` convention, install this repository as one skill folder. The required shape is:
+
+```text
+<skills-directory>/restaurant-operation-digital-advisor/SKILL.md
+<skills-directory>/restaurant-operation-digital-advisor/references/
+<skills-directory>/restaurant-operation-digital-advisor/scripts/
+<skills-directory>/restaurant-operation-digital-advisor/examples/
+```
+
 ## Vendor Recommendation Boundary
 
 This skill does not provide default vendor rankings, affiliate-style recommendations, or paid placement.
