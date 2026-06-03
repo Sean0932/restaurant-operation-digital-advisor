@@ -1,4 +1,4 @@
-# Restaurant Operation Digital Advisor.skills
+# Restaurant Operation Digital Advisor.skill
 
 [中文](./README.md) | English
 
@@ -108,4 +108,3 @@ The script accepts JSON from a file or stdin and returns a score, readiness stag
 ## License
 
 Apache-2.0. See [LICENSE](./LICENSE).
-

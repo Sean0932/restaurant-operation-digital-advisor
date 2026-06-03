@@ -1,4 +1,4 @@
-# 餐饮经营数字化顾问.skills
+# 餐饮经营数字化顾问.skill
 
 中文 | [English](./README.en.md)
 
