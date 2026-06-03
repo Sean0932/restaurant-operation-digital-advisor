@@ -1,6 +1,6 @@
-# 餐饮经营数字化顾问
+# 餐饮经营数字化顾问.skills
 
-中文 | [English](./README.md)
+中文 | [English](./README.en.md)
 
 餐饮经营数字化顾问是一个平台无关的开源 Agent Skill Pack。
 
