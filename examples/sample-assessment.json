@@ -1,0 +1,21 @@
+{
+  "market": "China",
+  "language": "zh-CN",
+  "store_count": 3,
+  "operating_model": "emerging_chain",
+  "daily_orders": 420,
+  "monthly_revenue": 680000,
+  "sku_count": 86,
+  "system_count": 4,
+  "labor_pressure": "medium",
+  "issues": [
+    "memory_or_chat",
+    "low_system_adoption",
+    "ordering_receiving_mismatch",
+    "inventory_untrusted",
+    "manual_reconciliation",
+    "isolated_systems",
+    "unclear_permissions"
+  ]
+}
+
