@@ -36,3 +36,13 @@ F. Diagnose a specific issue
 After the user answers, confirm the interpretation and ask the next step.
 
 Do not produce the final diagnosis until the minimum required inputs are collected.
+
+Use this rhythm after each reply:
+
+```text
+Got it: [short interpretation]
+This matters because [one sentence].
+Next step: [3-5 choices]
+```
+
+When scoring in the final report, write `Score: 58` or `综合得分：58 分`. Do not write `58/88`.

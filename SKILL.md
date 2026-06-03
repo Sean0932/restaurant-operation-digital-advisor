@@ -31,6 +31,7 @@ Do not use it for generic restaurant operations unless the question affects syst
 4. For readiness scoring, use `scripts/score_assessment.py` when structured inputs are available. If not enough inputs are available, explain that the score is directional and ask for the missing fields.
 5. Generate advice from the scoring result, user context, and relevant references.
 6. Keep the output practical: current judgment, key risks, root-cause attribution, next actions, and checks.
+7. Display scores as plain points, such as `Score: 58` or `58 points`. Do not write `58/88`; the 88 cap is an internal calibration limit, not a user-facing denominator.
 
 ## Guided Choice Flow
 
@@ -42,6 +43,8 @@ When the user wants to experience a full readiness check, guide them with short 
 - Include "not sure" when a restaurant owner may not know the exact answer.
 - Use free-form follow-up only for the biggest pain, current tools, or candidate vendors.
 - If the host agent supports buttons, forms, or interactive choices, use them. If not, present plain text choices.
+- Preserve the guided experience: after each user reply, summarize the selected meaning in 1-3 bullets, explain why the next step matters in one sentence, then ask the next choices.
+- Do not skip directly from the first answers to a long final report unless the user explicitly asks to stop the guided flow and generate the report.
 
 Default full check steps:
 
@@ -51,7 +54,7 @@ Default full check steps:
 4. Operating issues.
 5. Decision context and next action.
 
-After each step, briefly confirm what was learned and move to the next step. Do not generate the final diagnosis until the minimum required inputs are collected.
+After each step, briefly confirm what was learned and move to the next step. Do not generate the final diagnosis until the minimum required inputs are collected and the user has completed the guided steps or asks for an early diagnosis.
 
 ## Modes
 

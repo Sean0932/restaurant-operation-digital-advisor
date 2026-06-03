@@ -15,7 +15,7 @@ Checks or vendor questions
 ## Readiness Check
 
 ```text
-Score and stage
+Score and stage (write "Score: 58" or "综合得分：58 分"; do not write "58/88")
 One-sentence conclusion
 Weakest dimensions
 Top risks
@@ -23,6 +23,16 @@ What not to do yet
 Next 30 days
 Vendor questions, if relevant
 ```
+
+For a full guided readiness check, keep a visible flow:
+
+```text
+Step confirmation
+Why the next step matters
+Next choices
+```
+
+Only produce the final report after the guided steps are complete or the user asks for an early diagnosis.
 
 ## 30-Day Action Plan
 

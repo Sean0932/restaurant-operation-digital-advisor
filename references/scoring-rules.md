@@ -16,7 +16,12 @@ Start from 82 points. Deduct for operating complexity and risk:
 - number of selected operating issues,
 - expansion model complexity.
 
-Clamp the score between 30 and 88.
+Clamp the score between 30 and 88 as an internal calibration guardrail. Do not present 88 as the denominator.
+
+User-facing format:
+
+- Correct: `Score: 58` / `58 points` / `综合得分：58 分`
+- Avoid: `58/88`, `58 out of 88`, or `58 / 88`
 
 ## Stage
 
@@ -37,4 +42,3 @@ Dimension scores are derived from the overall score and issue tags:
 - Responsibility and organization
 
 Keep the explanation tied to user inputs. Do not present the score as an objective audit result.
-
