@@ -5,9 +5,10 @@ Keep the operating-chain framework stable. Localize terminology, examples, and t
 ## Default Rules
 
 - Respond in the user's language.
-- If the market is known, use local system categories and examples.
+- If the market is known, use local system categories and operating examples.
 - If the market is unknown, infer lightly from language but avoid naming vendors.
 - Do not invent vendor features, prices, availability, or local support.
+- Do not name specific vendor, platform, or software brands in guided questions, choices, or default examples. Mention brands only when the user provided them or explicitly asks to compare/research named vendors.
 
 ## China
 
@@ -15,8 +16,9 @@ Use owner-facing Chinese. Common terms:
 
 - 收银系统
 - 小程序
-- 美团 / 饿了么
-- 企微 / 飞书
+- 外卖平台
+- 线上点餐系统
+- 即时通讯/协同工具
 - 供应链系统
 - 财务软件
 - 储值、券、会员、私域
@@ -48,7 +50,7 @@ Use local channel examples only when the user names the market or asks for vendo
 
 - POS
 - delivery platforms
-- messaging channels such as WhatsApp or LINE,
+- messaging or collaboration channels,
 - inventory,
 - central kitchen,
 - accounting.
@@ -63,4 +65,3 @@ Mention privacy and compliance only when relevant. Common categories:
 - payment compliance,
 - labor scheduling,
 - reporting.
-
