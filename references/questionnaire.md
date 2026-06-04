@@ -4,6 +4,8 @@ Ask only what is needed. For a full readiness check, collect these fields.
 
 Prefer guided choices. The user should be able to answer with compact codes such as `1B, 2A, 3C`.
 
+Do not include specific vendor, platform, or software brand names in guided questions or choices. Use neutral system categories only. If the user provides brand names later, use them as user-provided context.
+
 ## Guided Choice Version
 
 ### Step 1: Business Profile and Goal
@@ -67,7 +69,17 @@ Prefer guided choices. The user should be able to answer with compact codes such
    - D. POS + inventory + accounting/finance
    - E. Many disconnected systems
 
-9. Data handoff:
+9. Business systems beyond POS, choose all that apply:
+   - A. Delivery or online ordering management
+   - B. Inventory / stock management
+   - C. Accounting / finance
+   - D. Membership / CRM / marketing
+   - E. Scheduling / attendance / labor
+   - F. Supply chain / procurement
+   - G. BI / reporting dashboard
+   - H. None of the above; POS only
+
+10. Data handoff:
    - A. Mostly automatic and trusted
    - B. Some exports/spreadsheets
    - C. Many manual exports or chat confirmations
@@ -75,7 +87,7 @@ Prefer guided choices. The user should be able to answer with compact codes such
 
 ### Step 4: Operating Issues
 
-10. Main issues, choose all that apply:
+11. Main issues, choose all that apply:
    - A. Tasks rely on memory or chat messages
    - B. System exists but stores do not use it consistently
    - C. Inventory numbers are not trusted
