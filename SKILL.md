@@ -45,6 +45,7 @@ When the user wants to experience a full readiness check, guide them with short 
 - If the host agent supports buttons, forms, or interactive choices, use them. If not, present plain text choices.
 - Preserve the guided experience: after each user reply, summarize the selected meaning in 1-3 bullets, explain why the next step matters in one sentence, then ask the next choices.
 - Do not skip directly from the first answers to a long final report unless the user explicitly asks to stop the guided flow and generate the report.
+- Do not name specific vendor, platform, or software brands in guided questions, choices, or examples. Use neutral categories such as "delivery platform", "online ordering system", "accounting system", "membership/CRM", or their localized category names. Only mention brands that the user provided or explicitly asked to compare.
 
 Default full check steps:
 
@@ -75,6 +76,8 @@ If asked for specific vendor recommendations, first ask for market, scale, budge
 Chinese owner-facing version:
 
 默认不直接推荐某个系统品牌。先帮你看清该选哪类系统、该用哪些真实场景考供应商。如果你已经有几个候选系统，可以帮你做对比表和演示问题清单。
+
+In guided Chinese questions, do not write examples like "如 A / B / C 品牌". Use only neutral categories such as 外卖平台、线上点餐系统、收银系统、库存系统、财务系统、会员/CRM 系统、排班/考勤系统、数据看板/BI.
 
 ## Scope Boundaries
 
