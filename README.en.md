@@ -2,38 +2,42 @@
 
 [中文](./README.md) | English
 
-Restaurant Operation Digital Advisor is an open, agent-agnostic skill pack for restaurant digital operations.
+> An open-source agent skill for restaurant operation diagnosis: decide whether an operating problem should be solved by **systems, workflows, data handoff, or organizational responsibility**.
 
-It helps restaurant owners, store leaders, chain operators, and restaurant digital consultants decide whether an operating problem should be solved by a system, a workflow change, better data handoff, or clearer responsibility.
+Restaurant Operation Digital Advisor is an agent-agnostic skill pack for restaurant owners, store leaders, chain operators, and restaurant digital consultants.
 
-It is not a vendor ranking list, not a paid recommendation engine, and not a full restaurant management playbook. It focuses on restaurant operating chains: store execution, ordering, receiving, inventory, waste, reconciliation, loyalty, delivery, reporting, and the handoff between systems and people.
+Many restaurants already use POS, online ordering, inventory, accounting, loyalty, delivery, and reporting tools. The hard question is not always "which system should we buy?" It is often:
 
-## What It Helps With
+> If we replaced the system tomorrow, would the same problem still happen?
 
-- Check whether a restaurant is ready to buy, replace, or integrate systems.
-- Diagnose problems such as inventory mismatch, reconciliation gaps, low system adoption, delivery order chaos, or loyalty campaign failure.
-- Prepare vendor demo questions and acceptance checks.
-- Design workflows for ordering, receiving, prep, service, inventory count, waste, shift handoff, reconciliation, and member engagement.
-- Assess expansion readiness from one store to multiple locations or from one region to another.
-- Create a 30-day action plan after a readiness check, then run a lightweight follow-up review when the user returns after taking action.
+If the answer is yes, the problem is not only a system problem.
 
-For a full readiness check, the skill can guide users with short multiple-choice steps. In plain chat, users can answer with codes such as `1B, 2A, 3D`; in agents that support interactive UI, the same flow can be rendered as buttons or form choices.
+## Start in 3 Minutes
 
-## Design Principles
+### 1. Install
 
-- Agent-agnostic: works as a readable skill pack for Codex, Claude Code, OpenClaw-style agents, and other agents that can load `SKILL.md`.
-- Progressive disclosure: `SKILL.md` stays small; detailed knowledge lives in `references/`.
-- Deterministic scoring: `scripts/score_assessment.py` keeps baseline readiness scores consistent across agents.
-- Localized answers: the same framework is used globally, while terminology and examples adapt to the user's language and market.
-- Open-source boundary: the public skill includes the framework, templates, scoring baseline, and examples; it excludes private prompts, customer data, payment logic, and commercial report templates.
+Ask the agent you use, such as Claude Code, Codex, OpenClaw, Cursor, Gemini CLI, or OpenCode:
 
-## Install
+```text
+Install this skill: https://github.com/Sean0932/restaurant-operation-digital-advisor
+```
 
-This repository is a single skill folder: the repo root contains `SKILL.md`, `references/`, `scripts/`, and `examples/`.
+Or use a generic skills installer:
 
-### Claude Code
+```bash
+npx skills add Sean0932/restaurant-operation-digital-advisor
+```
 
-Claude Code discovers skills from `~/.claude/skills/<skill-name>/SKILL.md`.
+Manual install paths:
+
+| Runtime | Install path |
+|---|---|
+| Claude Code | `~/.claude/skills/restaurant-operation-digital-advisor/` |
+| Codex | `~/.codex/skills/restaurant-operation-digital-advisor/` |
+| OpenClaw | `~/.openclaw/workspace/skills/restaurant-operation-digital-advisor/` |
+| Other agents | Put this repository in the runtime's `skills/` directory |
+
+Claude Code example:
 
 ```bash
 mkdir -p ~/.claude/skills
@@ -41,59 +45,98 @@ git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
   ~/.claude/skills/restaurant-operation-digital-advisor
 ```
 
-Restart Claude Code, then ask:
+Restart the agent after installation.
+
+### 2. Trigger
 
 ```text
 Use the restaurant-operation-digital-advisor skill to run a restaurant operation readiness check.
 ```
 
-### Codex
-
-Codex builds that support local skills commonly discover them from `~/.codex/skills/<skill-name>/SKILL.md`.
-
-```bash
-mkdir -p ~/.codex/skills
-git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
-  ~/.codex/skills/restaurant-operation-digital-advisor
-```
-
-Restart Codex, then ask:
+You can also ask with a real operating problem:
 
 ```text
-Use the restaurant-operation-digital-advisor skill.
+We have 3 stores and use POS, online ordering, inventory, and accounting software,
+but inventory and month-end reconciliation are always wrong. Should we replace systems?
 ```
 
-If your Codex environment includes the `$skill-installer`, you can also ask Codex:
+### 3. Expected Output
+
+Most responses should be structured around:
+
+- Current judgment;
+- Root-cause attribution: systems / workflows / data handoff / responsibility;
+- Main operating-chain risks;
+- Next actions;
+- Checklists or vendor questions when needed.
+
+## Diagnosis Framework
+
+This skill is not primarily a vendor recommender. It helps users classify the operating problem first.
+
+| Root cause | Typical signs | What to inspect first |
+|---|---|---|
+| Systems | Missing features, weak configuration, poor integration, mismatched tools | Whether the current systems support the required operating actions |
+| Workflows | Inconsistent store execution, overly complex process, unmanaged exceptions | Ordering, receiving, counting, waste, reconciliation, and handoff paths |
+| Data handoff | Data exists but cannot move cleanly across roles, systems, and reports | Order, payment, inventory, and accounting traceability |
+| Responsibility | Nobody owns creation, review, correction, or final interpretation | Who creates, reviews, fixes, and explains the numbers |
+
+The central question:
+
+> If the system changed tomorrow, would the same issue still happen?
+
+If yes, do not treat it as a pure system-selection problem.
+
+## Example
 
 ```text
-$skill-installer install https://github.com/Sean0932/restaurant-operation-digital-advisor
+User ❯ We have 3 stores and use POS, online ordering, inventory, and accounting software,
+       but inventory and month-end reconciliation are always wrong. Should we replace systems?
+
+Advisor ❯ Do not rush to replace systems.
+
+          This looks more like a broken loop between order channels,
+          inventory actions, and accounting rules.
+
+          First, take 10 high-frequency SKUs and compare system stock,
+          physical count, receiving, sales deduction, waste, transfers,
+          and manual adjustment records for 7 consecutive days.
+
+          Then take one recent month-end reconciliation gap and trace it
+          from order, payment, refund, inventory deduction, waste, and transfer
+          all the way to accounting entry.
+
+          If the breakpoints concentrate at system handoff points,
+          integration or replacement may be relevant.
+          If the breakpoints are store recording, warehouse review,
+          or month-end accounting correction, replacing systems will only
+          move the same problem into a new interface.
 ```
 
-### OpenClaw / 小龙虾
+More examples:
 
-If your OpenClaw build supports Git skill installation:
+- [Problem diagnosis before system replacement](./examples/problem-diagnosis-before-system-change.md)
+- [Guided readiness flow](./examples/guided-readiness-flow.md)
+- [Inventory issue review](./examples/inventory-issue-review.md)
+- [Vendor selection](./examples/vendor-selection.md)
 
-```bash
-openclaw skills install git:Sean0932/restaurant-operation-digital-advisor@main
-```
+## Working Modes
 
-Then enable or allow the skill according to your OpenClaw workspace configuration, restart the agent session if needed, and ask:
+- **Readiness Check**: decide whether the restaurant is ready to buy, replace, or integrate systems.
+- **Vendor & System Selection**: define system categories, compare user-provided options, and prepare demo questions and acceptance checks.
+- **Operating Workflow Design**: design or clean up ordering, receiving, prep, service, inventory count, waste, handoff, reconciliation, and member engagement.
+- **Issue Diagnosis**: review inventory mismatch, reconciliation gaps, low system adoption, delivery order chaos, failed campaigns, or disconnected data.
+- **Expansion Readiness**: assess whether workflows, data, and responsibility can scale to more stores or regions.
+- **30-Day Action Plan**: turn diagnosis into weekly actions and lightweight follow-up review.
+- **Integration & Data Handoff**: inspect data handoff across POS, delivery, inventory, accounting, loyalty/CRM, scheduling, and reporting.
 
-```text
-Use the restaurant-operation-digital-advisor skill.
-```
-
-Manual install also works: clone or copy this repository into your OpenClaw skills directory so the final layout contains:
-
-```text
-restaurant-operation-digital-advisor/SKILL.md
-```
+Full readiness checks can be guided by short multiple-choice steps. In plain chat, users can answer with codes such as `1B, 2A, 3D`; agents with interactive UI can render the same flow as buttons or form choices.
 
 ## Vendor Recommendation Boundary
 
 This skill does not provide default vendor rankings, affiliate-style recommendations, or paid placement.
 
-It helps users define system requirements, compare user-provided options, and design vendor evaluation scenarios. If asked for specific vendor recommendations, first ask for market, scale, budget, current stack, required modules, integration needs, and language or compliance constraints. Only name specific vendors when current market information is available or provided by the user.
+It helps users define system requirements, compare user-provided options, and design vendor evaluation scenarios. If asked for specific vendor recommendations, first ask for market, scale, budget, current stack, required modules, integration needs, and language or compliance constraints. Only name specific vendors when the user provides candidate vendors or explicitly asks for current vendor research. Do not invent vendor capabilities, pricing, availability, or local support.
 
 ## Quick Scoring
 
