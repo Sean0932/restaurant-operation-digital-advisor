@@ -40,6 +40,28 @@ DIMENSION_NAMES = {
     "responsibility": "Responsibility and organization",
 }
 
+BASE_OFFSETS = {
+    "store_execution": 8,
+    "order_channel_flow": 7,
+    "supply_inventory": 10,
+    "finance_reconciliation": 10,
+    "customer_loyalty": 3,
+    "system_data_handoff": 9,
+    "responsibility": 8,
+}
+
+
+def risk_level_for(score: int) -> str:
+    if score >= 75:
+        return "low"
+    if score >= 60:
+        return "medium"
+    if score >= 45:
+        return "medium_high"
+    if score >= 30:
+        return "high"
+    return "critical"
+
 
 def number(data: dict[str, Any], key: str, default: float = 0) -> float:
     try:
@@ -76,15 +98,15 @@ def score_assessment(data: dict[str, Any]) -> dict[str, Any]:
     operating_model = str(data.get("operating_model", data.get("operatingModel", ""))).lower()
     issues = list_value(data, "issues")
 
-    score = 82
-    score -= min(18, max(0, store_count - 1) * 2)
-    score -= min(14, system_count * 2)
-    score -= 10 if sku_count > 160 else 6 if sku_count > 90 else 2 if sku_count > 0 else 0
-    score -= 10 if daily_orders > 800 else 6 if daily_orders > 350 else 2 if daily_orders > 0 else 0
-    score -= 10 if labor_pressure == "high" else 6 if labor_pressure in {"medium", "mid"} else 2
-    score -= min(14, max(0, len(issues) - 5) * 2)
+    raw_score = 82
+    raw_score -= min(18, max(0, store_count - 1) * 2)
+    raw_score -= min(14, system_count * 2)
+    raw_score -= 10 if sku_count > 160 else 6 if sku_count > 90 else 2 if sku_count > 0 else 0
+    raw_score -= 10 if daily_orders > 800 else 6 if daily_orders > 350 else 2 if daily_orders > 0 else 0
+    raw_score -= 10 if labor_pressure == "high" else 6 if labor_pressure in {"medium", "mid"} else 2
+    raw_score -= min(14, max(0, len(issues) - 5) * 2)
     if operating_model in {"established_chain", "franchise", "multi_region", "multi-brand", "multi_brand"}:
-        score -= 4
+        raw_score -= 4
 
     dimension_penalties = {key: 0 for key in DIMENSION_NAMES}
     unknown_issues: list[str] = []
@@ -95,20 +117,21 @@ def score_assessment(data: dict[str, Any]) -> dict[str, Any]:
         else:
             unknown_issues.append(issue)
 
-    score = int(max(30, min(88, round(score))))
+    score = int(max(30, min(88, round(raw_score))))
     dimensions = []
+    dimension_base = max(score, 42)
     for key, name in DIMENSION_NAMES.items():
-        base_offset = {
-            "store_execution": 8,
-            "order_channel_flow": 7,
-            "supply_inventory": 10,
-            "finance_reconciliation": 10,
-            "customer_loyalty": 3,
-            "system_data_handoff": 9,
-            "responsibility": 8,
-        }[key]
-        dim_score = max(30, min(88, score - base_offset - dimension_penalties[key]))
-        dimensions.append({"key": key, "name": name, "score": dim_score})
+        dim_score = max(24, min(88, dimension_base - BASE_OFFSETS[key] - dimension_penalties[key]))
+        evidence = "issue_tag" if dimension_penalties[key] > 0 else "not_enough_specific_evidence"
+        dimensions.append(
+            {
+                "key": key,
+                "name": name,
+                "score": dim_score,
+                "risk_level": risk_level_for(dim_score),
+                "evidence": evidence,
+            }
+        )
 
     dimensions_sorted = sorted(dimensions, key=lambda item: item["score"])
     next_focus = [item["name"] for item in dimensions_sorted[:3]]
@@ -142,4 +165,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     raise SystemExit(main())
-

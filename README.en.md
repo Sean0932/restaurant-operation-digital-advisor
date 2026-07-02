@@ -12,6 +12,27 @@ Many restaurants already use POS, online ordering, inventory, accounting, loyalt
 
 If the answer is yes, the problem is not only a system problem.
 
+## Questions You Can Ask
+
+```text
+Delivery, POS, inventory, loyalty, and accounting each have their own data.
+Should we integrate first or replace systems?
+```
+
+```text
+Inventory and month-end reconciliation are wrong. Is this a system issue,
+a workflow issue, or a data handoff issue?
+```
+
+```text
+We are expanding from 5 stores to 20. Can our current workflows and systems scale?
+```
+
+```text
+The owner wants a system replacement in 3 months, but store and franchise data are messy.
+How should we proceed?
+```
+
 ## Start in 3 Minutes
 
 ### 1. Install
@@ -116,6 +137,8 @@ Advisor ❯ Do not rush to replace systems.
 More examples:
 
 - [Problem diagnosis before system replacement](./examples/problem-diagnosis-before-system-change.md)
+- [Data fragmentation review](./examples/data-fragmentation-review.md)
+- [Large-chain system replacement risk](./examples/large-chain-system-replacement-risk.md)
 - [Guided readiness flow](./examples/guided-readiness-flow.md)
 - [Inventory issue review](./examples/inventory-issue-review.md)
 - [Vendor selection](./examples/vendor-selection.md)
@@ -147,6 +170,7 @@ python3 scripts/score_assessment.py examples/sample-assessment.json
 ```
 
 The script accepts JSON from a file or stdin and returns a score, readiness stage, dimension scores, risk tags, and suggested next focus.
+Dimension results include risk levels and evidence status so high-risk reports do not mechanically assign the same score to every dimension.
 
 ## License
 

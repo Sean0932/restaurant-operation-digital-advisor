@@ -41,4 +41,21 @@ Dimension scores are derived from the overall score and issue tags:
 - System fit and data handoff
 - Responsibility and organization
 
+Even when the overall score is in the 30-49 high-risk range, do not mechanically assign the same score to every dimension. Dimension scores must reflect the evidence the user provided:
+
+- If a dimension has clear issue evidence, mark it as high risk and lower its score.
+- If a dimension has weak or missing evidence, do not force it to the floor; mark the evidence as insufficient or use "待确认" in narrative output.
+- Prefer a risk-level table when the inputs are not structured enough for precise dimension scores.
+- Avoid claims such as "all dimensions hit bottom" unless the user explicitly provided severe evidence for every dimension.
+
+Recommended user-facing risk levels:
+
+| Score range | Risk level | Chinese label |
+|---|---|---|
+| 75-88 | low | 低风险 |
+| 60-74 | medium | 中风险 |
+| 45-59 | medium_high | 中高风险 |
+| 30-44 | high | 高风险 |
+| 24-29 | critical | 极高风险 |
+
 Keep the explanation tied to user inputs. Do not present the score as an objective audit result.

@@ -16,6 +16,24 @@
 
 如果答案是“会”，问题通常不只是系统。
 
+## 你可以这样问
+
+```text
+我们外卖、收银、库存、会员、财务数据各算各的，应该先整合还是换系统？
+```
+
+```text
+库存不准和月底对账乱，是系统问题、流程问题，还是数据衔接问题？
+```
+
+```text
+我们准备从 5 家店扩到 20 家店，现在的流程和系统能不能撑住？
+```
+
+```text
+老板要求 3 个月内换系统，但门店和加盟商数据都很乱，应该怎么推进？
+```
+
 ## 3 分钟开始使用
 
 ### 1. 安装
@@ -114,6 +132,8 @@ git clone https://github.com/Sean0932/restaurant-operation-digital-advisor.git \
 更多示例见：
 
 - [换系统前的问题诊断](./examples/problem-diagnosis-before-system-change.md)
+- [平台数据割裂复盘](./examples/data-fragmentation-review.md)
+- [大型连锁换系统风险](./examples/large-chain-system-replacement-risk.md)
 - [完整体检引导流程](./examples/guided-readiness-flow.md)
 - [库存异常复盘](./examples/inventory-issue-review.md)
 - [系统选型顾问](./examples/vendor-selection.md)
@@ -169,6 +189,7 @@ python3 scripts/score_assessment.py examples/sample-assessment.json
 ```
 
 脚本支持从文件或 stdin 读取 JSON，输出总分、阶段判断、维度得分、风险标签和下一步重点。
+维度结果会同时包含风险等级和证据状态，避免把所有维度机械打成同一个分数。
 
 ## License
 
